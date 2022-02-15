@@ -83,7 +83,7 @@ public class Transfer2GPlus {
                  StandardOpenOption.READ, StandardOpenOption.WRITE)) {
                 long total = 0L;
                 if ((total = srcCh.transferTo(0, LENGTH, dstCh)) < LENGTH) {
-                    if (!Platform.isLinux())
+                    if (!Platform.isLinux() && !"AIX".equals(System.getProperty("os.name")))
                         throw new RuntimeException("Transfer too small: " + total);
 
                     // If this point is reached we're on Linux which cannot
